@@ -1,9 +1,11 @@
 package com.example.loginactivity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity {
     EditText mEmail,mPassword;
     Button mLoginBtn;
-    TextView mCreateBtn;
+    TextView mCreateBtn,forgotTextLink;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
 
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
         mLoginBtn=findViewById(R.id.SignIn);
         mCreateBtn=findViewById(R.id.DontHaveanAccount);
+        forgotTextLink=findViewById(R.id.forgotpassword);
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,7 @@ public class Login extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else{
                             Toast.makeText(Login.this, "Error !"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -78,13 +82,41 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-        TextView btn=findViewById(R.id.DontHaveanAccount);
-        btn.setOnClickListener(new View.OnClickListener() {
+        mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Login.this,Registration.class));
+                startActivity(new Intent(getApplicationContext(),Registration.class));
             }
         });
+
+        forgotTextLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText resetMail=new EditText(v.getContext());
+                AlertDialog.Builder passwordResetDialog =new AlertDialog.Builder(v.getContext());
+                passwordResetDialog.setTitle("Reset Password ?");
+                passwordResetDialog.setMessage("Enter Your Email To Receive the Reset Link.");
+                passwordResetDialog.setView(resetMail);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Extract email and send reset link
+
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //close the dialog
+
+
+                    }
+                });
+
+            }
+        });
+
     }
 }

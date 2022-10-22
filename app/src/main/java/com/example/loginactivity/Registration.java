@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class Registration extends AppCompatActivity {
     EditText mName,mUsername,mEmail,mPassword,mConfirmPassword;
     Button mRegister;
@@ -98,6 +100,7 @@ public class Registration extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(),Login.class));
                         }else{
                             Toast.makeText(Registration.this, "Error !"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -105,8 +108,12 @@ public class Registration extends AppCompatActivity {
             }
         });
 
+        mAlreadyuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Login.class));
+            }
+        });
 
-        TextView btn=findViewById(R.id.alreadyhaveanaccount);
-        btn.setOnClickListener(v -> startActivity(new Intent(Registration.this,Login.class)));
-    }
+         }
 }

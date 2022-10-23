@@ -15,7 +15,7 @@ public class userprofile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
     }
-//logout from the application
+    //logout from the application
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(),Login.class));

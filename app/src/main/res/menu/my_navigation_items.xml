@@ -2,12 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-        <item
-            android:id="@+id/nav_Home"
-            android:icon="@drawable/ic_baseline_home_24"
-            android:title="@string/home2"
-            tools:ignore="HardcodedText" />
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_circle"
+            android:title="Profile"
+            tools:ignore="HardcodedText" />
+    </group>
+    <group android:checkableBehavior="single">
         <item android:title="@string/interests">
             <menu>
                 <item
@@ -40,8 +43,10 @@
                     tools:ignore="HardcodedText" />
             </menu>
         </item>
+    </group>
 
-
+        <item android:title="@string/others">
+        <menu>
         <item
             android:id="@+id/nav_currentaffairs"
             android:icon="@drawable/ic_baseline_newspaper_24"
@@ -59,6 +64,9 @@
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_baseline_rate_review_24"
             android:title="@string/feedback1"/>
+
+        </menu>
+        </item>
 
 </menu>
 

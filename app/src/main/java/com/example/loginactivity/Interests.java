@@ -14,7 +14,7 @@ public class Interests extends AppCompatActivity {
     HomeFragment homeFragment=new HomeFragment();
     ChatFragment chatFragment=new ChatFragment();
     NotificationFragment notificationFragment=new NotificationFragment();
-    ProfileFragment profileFragment=new ProfileFragment();
+    ActivityFragment activityFragment=new ActivityFragment();
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -37,11 +37,12 @@ public class Interests extends AppCompatActivity {
                 case R.id.chat:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,chatFragment).commit();
                     return true;
+
                 case R.id.notification:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,notificationFragment).commit();
                     return true;
-                case R.id.account:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,profileFragment).commit();
+                case R.id.activity:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,activityFragment).commit();
                     return true;
 
             }

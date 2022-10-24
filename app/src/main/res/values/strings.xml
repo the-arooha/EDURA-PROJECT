@@ -87,4 +87,16 @@
     <string name="new_delhi">New Delhi</string>
     <string name="home11">Home</string>
     <string name="todo21">TODO</string>
+    <string name="others">Others</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
+    <string-array name="Topics">
+        <item>Select Topic</item>
+        <item>Science</item>
+        <item>Arts</item>
+        <item>Commerce</item>
+        <item>Technology</item>
+        <item>Physical Education</item>
+    </string-array>
 </resources>

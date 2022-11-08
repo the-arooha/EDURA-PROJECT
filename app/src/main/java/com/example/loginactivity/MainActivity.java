@@ -18,9 +18,11 @@ import static com.example.loginactivity.R.layout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void readQuestionsPost() {
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("questions posts");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("question posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -152,5 +154,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+        MenuItem item=menu.findItem(R.id.search);
+        SearchView searchView=(SearchView) item.getActionView();
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

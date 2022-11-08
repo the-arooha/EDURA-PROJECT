@@ -6,13 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.loginactivity.Model.Post;
+import com.example.loginactivity.Model.User;
 import com.example.loginactivity.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.util.List;
@@ -49,6 +56,9 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.topicTextView.setText(post.getTopic());
         holder.askedOnTextView.setText(post.getDate());
 
+        publisherInformation(holder.publisher_profile_image,holder.asked_by_Textview,post.getPublisher());
+
+
     }
 
     @Override
@@ -83,5 +93,24 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
             expandable_text=itemView.findViewById(R.id.expand_text_view);
 
         }
+    }
+
+    private void publisherInformation(ImageView publisherImage,TextView askedBY,String userid){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users").child(userid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user=snapshot.getValue(User.class);
+                Glide.with(mContext).load(user.getProfileimageurl()).into(publisherImage);
+                askedBY.setText(user.getName());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(mContext, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 }

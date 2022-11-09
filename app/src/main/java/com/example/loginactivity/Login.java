@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     private EditText mEmail,mPassword;
@@ -32,14 +33,29 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog loader;
 
+    private FirebaseAuth.AuthStateListener authStateListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        mAuth=FirebaseAuth.getInstance();
+
+        authStateListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user=mAuth.getCurrentUser();
+                if(user!=null){
+                    Intent intent =new Intent(Login.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+
         mEmail=findViewById(R.id.inputUsername);
         mPassword=findViewById(R.id.inputPassword);
-        mAuth=FirebaseAuth.getInstance();
+
         mLoginBtn=findViewById(R.id.SignIn);
         mCreateBtn=findViewById(R.id.DontHaveanAccount);
         forgotTextLink=findViewById(R.id.forgotpassword);
@@ -141,5 +157,17 @@ public class Login extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(authStateListener);
     }
 }

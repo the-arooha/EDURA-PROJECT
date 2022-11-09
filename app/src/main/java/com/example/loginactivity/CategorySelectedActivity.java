@@ -48,6 +48,9 @@ public class CategorySelectedActivity extends AppCompatActivity{
         toolbar=findViewById(R.id.topAppbar);
         setSupportActionBar(toolbar);
 
+
+
+
         recyclerView=findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);

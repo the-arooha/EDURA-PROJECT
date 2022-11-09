@@ -229,9 +229,9 @@ public class Registration extends AppCompatActivity {
                                             result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
-                                                    String imageurl=uri.toString();
+                                                    String imageUrl=uri.toString();
                                                     Map hashMap=new HashMap();
-                                                    hashMap.put("profileimageurl",imageurl);
+                                                    hashMap.put("profileimageurl",imageUrl);
                                                     reference.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
                                                         @Override
                                                         public void onComplete(@NonNull Task task) {

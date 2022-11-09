@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PostAdapter postAdapter;
     private List<Post> postList;
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         MaterialToolbar toolbar=findViewById(topAppbar);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) DrawerLayout drawerLayout=findViewById(drawer_layout);
+        DrawerLayout drawerLayout=findViewById(drawer_layout);
         NavigationView navigationView=findViewById(navigation_view);
         toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         postList=new ArrayList<>();
         postAdapter=new PostAdapter(MainActivity.this,postList);
         recyclerView.setAdapter(postAdapter);
-        readQuestionsPost();
+        readQuestionsPosts();
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id=item.getItemId();
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void readQuestionsPost() {
+    private void readQuestionsPosts() {
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("question posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override

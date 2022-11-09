@@ -99,15 +99,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                     break;
                 case nav_science:
-                    Toast.makeText(MainActivity.this, "Science", Toast.LENGTH_SHORT).show();break;
+                    Intent intent1=new Intent(MainActivity.this,CategorySelectedActivity.class);
+                    intent1.putExtra("title","Science");
+                    startActivity(intent1);
+                    break;
                 case nav_arts:
-                    Toast.makeText(MainActivity.this, "Arts", Toast.LENGTH_SHORT).show();break;
+                    Intent intent2=new Intent(MainActivity.this,CategorySelectedActivity.class);
+                    intent2.putExtra("title","Arts");
+                    startActivity(intent2);
+                    break;
                 case nav_commerce:
-                    Toast.makeText(MainActivity.this, "Commerce", Toast.LENGTH_SHORT).show();break;
+                    Intent intent3=new Intent(MainActivity.this,CategorySelectedActivity.class);
+                    intent3.putExtra("title","Commerce");
+                    startActivity(intent3);
+                    break;
                 case nav_technology:
-                    Toast.makeText(MainActivity.this, "Technology", Toast.LENGTH_SHORT).show();break;
+                    Intent intent4=new Intent(MainActivity.this,CategorySelectedActivity.class);
+                    intent4.putExtra("title","Technology");
+                    startActivity(intent4);
+                    break;
                 case nav_physicaleducation:
-                    Toast.makeText(MainActivity.this, "Physical Education", Toast.LENGTH_SHORT).show();break;
+                    Intent intent5=new Intent(MainActivity.this,CategorySelectedActivity.class);
+                    intent5.putExtra("title","Physical Education");
+                    startActivity(intent5);
+                    break;
                 case nav_currentaffairs:
                     Toast.makeText(MainActivity.this, "Current Affairs", Toast.LENGTH_SHORT).show();break;
                 case nav_tests:

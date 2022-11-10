@@ -1,6 +1,7 @@
 package com.example.loginactivity.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.loginactivity.CommentsActivity;
 import com.example.loginactivity.Model.Post;
 import com.example.loginactivity.Model.User;
 import com.example.loginactivity.R;
@@ -98,6 +100,26 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }else {
                     FirebaseDatabase.getInstance().getReference().child("dislikes").child(post.getPostid()).child(firebaseUser.getUid()).removeValue();
                 }
+            }
+        });
+
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext, CommentsActivity.class);
+                intent.putExtra("postid",post.getPostid());
+                intent.putExtra("publisher",post.getPublisher());
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext,CommentsActivity.class);
+                intent.putExtra("postid",post.getPostid());
+                intent.putExtra("publisher",post.getPublisher());
+                mContext.startActivity(intent);
             }
         });
 

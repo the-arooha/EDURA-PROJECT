@@ -11,7 +11,6 @@ import static com.example.loginactivity.R.id.nav_share;
 import static com.example.loginactivity.R.id.nav_technology;
 import static com.example.loginactivity.R.id.nav_tests;
 import static com.example.loginactivity.R.id.navigation_view;
-import static com.example.loginactivity.R.id.shareButton;
 import static com.example.loginactivity.R.id.topAppbar;
 import static com.example.loginactivity.R.layout;
 

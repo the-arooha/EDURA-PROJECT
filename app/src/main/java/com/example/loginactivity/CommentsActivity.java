@@ -3,6 +3,7 @@ package com.example.loginactivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.loginactivity.Adapters.CommentAdapter;
+import com.example.loginactivity.Model.Comment;
 import com.example.loginactivity.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,8 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,6 +48,9 @@ public class CommentsActivity extends AppCompatActivity {
     private EditText editText;
     private ProgressDialog loader;
     String postid;
+
+    private CommentAdapter commentAdapter;
+    private List<Comment> commentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +82,21 @@ public class CommentsActivity extends AppCompatActivity {
             }
         });
 
+
+        recyclerView =findViewById(R.id.recycler_view);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        commentList=new ArrayList<>();
+        commentAdapter=new CommentAdapter(CommentsActivity.this,commentList,postid);
+        recyclerView.setAdapter(commentAdapter);
+
         getImage();
+
+        readComments();
     }
 
     private void addComment(){
@@ -117,6 +140,27 @@ public class CommentsActivity extends AppCompatActivity {
 //                Glide.with(CommentsActivity.this).load(user.getProfileimageurl()).into(circleImageView);
                 com.example.loginactivity.Model.User user=snapshot.getValue(User.class);
                 Glide.with(CommentsActivity.this).load(user.getProfileimageurl()).into(circleImageView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CommentsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void readComments(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("comments").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                commentList.clear();
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    Comment comment=dataSnapshot.getValue(Comment.class);
+                    commentList.add(comment);
+                }
+
+                commentAdapter.notifyDataSetChanged();
             }
 
             @Override

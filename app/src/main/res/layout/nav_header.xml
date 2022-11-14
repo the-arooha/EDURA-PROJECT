@@ -30,7 +30,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/annuuu"
+        android:text="Ask a Query, Answer a Query"
         android:layout_below="@+id/name"
         android:textColor="@color/lightgrey"
         android:textSize="12sp"

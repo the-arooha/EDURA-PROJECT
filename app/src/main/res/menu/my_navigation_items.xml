@@ -60,10 +60,6 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_baseline_share_24"
             android:title="@string/share1"/>
-        <item
-            android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_baseline_rate_review_24"
-            android:title="@string/feedback1"/>
 
         </menu>
         </item>

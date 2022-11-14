@@ -200,7 +200,7 @@ public class Registration extends AppCompatActivity {
                                       if(task.isSuccessful()){
                                           Toast.makeText(Registration.this, "Details set Successfully", Toast.LENGTH_SHORT).show();
                                       }else{
-                                          Toast.makeText(Registration.this, "Failed yo upload data" + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                          Toast.makeText(Registration.this, "Failed to upload data" + task.getException().toString(), Toast.LENGTH_SHORT).show();
                                       }
 
                                       finish();

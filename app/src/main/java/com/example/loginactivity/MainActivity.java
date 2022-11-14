@@ -4,7 +4,6 @@ import static com.example.loginactivity.R.id.drawer_layout;
 import static com.example.loginactivity.R.id.nav_arts;
 import static com.example.loginactivity.R.id.nav_commerce;
 import static com.example.loginactivity.R.id.nav_currentaffairs;
-import static com.example.loginactivity.R.id.nav_feedback;
 import static com.example.loginactivity.R.id.nav_physicaleducation;
 import static com.example.loginactivity.R.id.nav_profile;
 import static com.example.loginactivity.R.id.nav_science;
@@ -12,6 +11,7 @@ import static com.example.loginactivity.R.id.nav_share;
 import static com.example.loginactivity.R.id.nav_technology;
 import static com.example.loginactivity.R.id.nav_tests;
 import static com.example.loginactivity.R.id.navigation_view;
+import static com.example.loginactivity.R.id.shareButton;
 import static com.example.loginactivity.R.id.topAppbar;
 import static com.example.loginactivity.R.layout;
 
@@ -128,9 +128,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case nav_tests:
                     Toast.makeText(MainActivity.this, "Tests", Toast.LENGTH_SHORT).show();break;
                 case nav_share:
-                    Toast.makeText(MainActivity.this, "Share", Toast.LENGTH_SHORT).show();break;
-                case nav_feedback:
-                    Toast.makeText(MainActivity.this, "Feedback", Toast.LENGTH_SHORT).show();break;
+                    Intent intent6=new Intent(Intent.ACTION_SEND);
+                    intent6.setType("text/plain");
+                    intent6.putExtra(Intent.EXTRA_SUBJECT,"Check out this community based educational query application");
+                    intent6.putExtra(Intent.EXTRA_TEXT,"Your Application Link");
+                    startActivity(Intent.createChooser(intent6,"Share via"));
+                    return super.onOptionsItemSelected(item);
 
                 default:
                     return true;
@@ -178,4 +181,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onCreateOptionsMenu(menu);
     }
+
+
 }

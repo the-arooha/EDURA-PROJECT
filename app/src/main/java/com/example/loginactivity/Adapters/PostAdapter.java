@@ -152,7 +152,6 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
             like=itemView.findViewById(R.id.like);
             dislike=itemView.findViewById(R.id.dislike);
             comment=itemView.findViewById(R.id.comment);
-            save=itemView.findViewById(R.id.save);
             topicTextView=itemView.findViewById(R.id.topicTextView);
             askedOnTextView=itemView.findViewById(R.id.askedOnTextView);
             expandable_text=itemView.findViewById(R.id.expand_text_view);

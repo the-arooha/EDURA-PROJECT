@@ -11,6 +11,7 @@ import static com.example.loginactivity.R.id.nav_share;
 import static com.example.loginactivity.R.id.nav_technology;
 import static com.example.loginactivity.R.id.nav_tests;
 import static com.example.loginactivity.R.id.navigation_view;
+import static com.example.loginactivity.R.id.question_text;
 import static com.example.loginactivity.R.id.topAppbar;
 import static com.example.loginactivity.R.layout;
 
@@ -20,6 +21,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginactivity.Adapters.PostAdapter;
 import com.example.loginactivity.Model.Post;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     private ProgressBar progress_circular;
 
+    ArrayAdapter<Post> arrayAdapter;
+    ListView listView;
     private PostAdapter postAdapter;
     private List<Post> postList;
 
@@ -58,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
 
+        listView=findViewById(R.id.listview);
+        arrayAdapter=new ArrayAdapter<Post>(this, android.R.layout.simple_list_item_1,question_text);
+        listView.setAdapter(arrayAdapter);
 
         fab=findViewById(R.id.fab);
         recyclerView=findViewById(R.id.recyclerView);
@@ -172,14 +181,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search,menu);
-        MenuItem item=menu.findItem(R.id.search);
-        SearchView searchView=(SearchView) item.getActionView();
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search,menu);
+//        MenuItem menuItem=menu.findItem(R.id.search);
+//        SearchView searchView=(SearchView) menuItem.getActionView();
+//
+//        searchView.setQueryHint("Type here to search");
+//
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                mySearch(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                mySearch(newText);
+//                return false;
+//            }
+//        });
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
-        return super.onCreateOptionsMenu(menu);
-    }
+//    private  void mySearch(String newText){
+//        FirebaseRecyclerOptions<Post> options=
+//                new FirebaseRecyclerOptions.Builder<Post>()
+//                        .setQuery(FirebaseDatabase.getInstance().getReference().child("question posts").orderByChild("question").startAt(newText).endAt(newText+"~"),Post.class)
+//                        .build();
+//
+//
+//       postAdapter= new Post(options);
+//       postAdapter.startListening();
+//      recyclerView.setAdapter(postAdapter);
 
+//
+//    }
 
 }

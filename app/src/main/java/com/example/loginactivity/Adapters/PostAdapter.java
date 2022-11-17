@@ -1,5 +1,6 @@
 package com.example.loginactivity.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.example.loginactivity.CommentsActivity;
 import com.example.loginactivity.Model.Post;
 import com.example.loginactivity.Model.User;
 import com.example.loginactivity.R;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
+
 public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public Context mContext;
@@ -41,6 +45,8 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
         this.mPostList = mPostList;
     }
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,6 +54,7 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         return new PostAdapter.ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -130,6 +137,7 @@ public class PostAdapter extends  RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         return mPostList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

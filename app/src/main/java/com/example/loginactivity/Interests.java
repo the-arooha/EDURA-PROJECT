@@ -37,7 +37,6 @@ public class Interests extends AppCompatActivity {
                 case R.id.chat:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,chatFragment).commit();
                     return true;
-
                 case R.id.notification:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,notificationFragment).commit();
                     return true;
